@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
 import dxcTheme from './theme/dxcTheme';
+import { AuthProvider } from './context/AuthContext';
 import { CaseProvider } from './context/CaseContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -12,9 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ThemeProvider theme={dxcTheme}>
         <CssBaseline />
-        <CaseProvider>
-          <App />
-        </CaseProvider>
+        <AuthProvider>
+          <CaseProvider>
+            <App />
+          </CaseProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

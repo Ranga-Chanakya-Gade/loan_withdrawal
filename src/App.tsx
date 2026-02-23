@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { IntakePage } from './pages/IntakePage';
 import { ExtractionPage } from './pages/ExtractionPage';
@@ -11,19 +13,32 @@ import { ConfirmationPage } from './pages/ConfirmationPage';
 
 export default function App() {
   return (
-    <AppShell>
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/intake" element={<IntakePage />} />
-        <Route path="/extraction" element={<ExtractionPage />} />
-        <Route path="/triage" element={<TriagePage />} />
-        <Route path="/processing" element={<Navigate to="/processing/low" replace />} />
-        <Route path="/processing/low" element={<LowTouchPage />} />
-        <Route path="/processing/moderate" element={<ModerateTouchPage />} />
-        <Route path="/processing/high" element={<HighTouchPage />} />
-        <Route path="/confirmation" element={<ConfirmationPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AppShell>
+    <Routes>
+      {/* Public routes — no auth required */}
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* Protected routes — require ServiceNow OAuth session */}
+      <Route
+        path="/*"
+        element={
+          <ProtectedRoute>
+            <AppShell>
+              <Routes>
+                <Route path="/" element={<DashboardPage />} />
+                <Route path="/intake" element={<IntakePage />} />
+                <Route path="/extraction" element={<ExtractionPage />} />
+                <Route path="/triage" element={<TriagePage />} />
+                <Route path="/processing" element={<Navigate to="/processing/low" replace />} />
+                <Route path="/processing/low" element={<LowTouchPage />} />
+                <Route path="/processing/moderate" element={<ModerateTouchPage />} />
+                <Route path="/processing/high" element={<HighTouchPage />} />
+                <Route path="/confirmation" element={<ConfirmationPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </AppShell>
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
