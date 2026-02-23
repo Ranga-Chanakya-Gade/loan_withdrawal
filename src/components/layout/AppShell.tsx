@@ -377,14 +377,14 @@ export function AppShell({ children }: Props) {
           backgroundColor: DXC.canvas,
         }}
       >
-        {/* Case header bar */}
+        {/* Case header bar — hidden on Dashboard */}
         <Box
           sx={{
             backgroundColor: DXC.white,
             borderBottom: '1px solid rgba(14,16,32,0.08)',
             px: 3,
             py: 1.25,
-            display: 'flex',
+            display: currentPath === '/' ? 'none' : 'flex',
             alignItems: 'center',
             gap: 2,
             flexWrap: 'wrap',
@@ -493,7 +493,7 @@ export function AppShell({ children }: Props) {
         </Box>
 
         {/* Page content */}
-        <Box sx={{ p: { xs: 2, md: 3 } }}>
+        <Box sx={{ p: currentPath === '/' ? 0 : { xs: 2, md: 3 } }}>
           {children}
         </Box>
       </Box>
