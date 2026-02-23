@@ -28,6 +28,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import PolicyIcon from '@mui/icons-material/Policy';
 import { useCase } from '../../context/CaseContext';
+import dxcLogo from '../../../DXC-Full-Color.png';
 import { TouchLevelBadge } from '../shared/TouchLevelBadge';
 import { DXC } from '../../theme/dxcTheme';
 
@@ -74,20 +75,23 @@ export function AppShell({ children }: Props) {
       }}
     >
       {/* Logo area */}
-      <Box sx={{ px: 2.5, pt: 3, pb: 2.5 }}>
-        <Typography
+      <Box sx={{ px: 2.5, pt: 2.5, pb: 2 }}>
+        <Box
+          component="img"
+          src={dxcLogo}
+          alt="DXC Technology"
           sx={{
-            fontFamily: '"GT Standard Extended", "Arial Black", sans-serif',
-            fontWeight: 700,
-            fontSize: '1.1rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: DXC.white,
-            lineHeight: 1,
+            height: 32,
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'contain',
+            objectPosition: 'left center',
+            // Full-color logo is designed for light backgrounds;
+            // brightness(0) invert(1) converts it to white for the dark sidebar.
+            filter: 'brightness(0) invert(1)',
+            display: 'block',
           }}
-        >
-          DXC
-        </Typography>
+        />
         <Typography
           sx={{
             fontFamily: '"Inter", sans-serif',
@@ -95,7 +99,7 @@ export function AppShell({ children }: Props) {
             fontSize: '0.72rem',
             color: 'rgba(255,255,255,0.45)',
             letterSpacing: '0.03em',
-            mt: 0.5,
+            mt: 0.75,
           }}
         >
           Insurance Solutions
@@ -320,17 +324,17 @@ export function AppShell({ children }: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          <Box
+            component="img"
+            src={dxcLogo}
+            alt="DXC Technology"
             sx={{
-              fontFamily: '"GT Standard Extended", "Arial Black", sans-serif',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
+              height: 26,
+              width: 'auto',
+              objectFit: 'contain',
+              filter: 'brightness(0) invert(1)',
             }}
-          >
-            Loan & Withdrawal
-          </Typography>
+          />
         </Toolbar>
       </AppBar>
 
@@ -377,13 +381,29 @@ export function AppShell({ children }: Props) {
             backgroundColor: DXC.white,
             borderBottom: '1px solid rgba(14,16,32,0.08)',
             px: 3,
-            py: 1.5,
+            py: 1.25,
             display: 'flex',
             alignItems: 'center',
             gap: 2,
             flexWrap: 'wrap',
           }}
         >
+          {/* DXC logo — full color on white background */}
+          <Box
+            component="img"
+            src={dxcLogo}
+            alt="DXC Technology"
+            sx={{
+              height: 28,
+              width: 'auto',
+              objectFit: 'contain',
+              objectPosition: 'left center',
+              display: 'block',
+              flexShrink: 0,
+            }}
+          />
+          <Box sx={{ width: 1, height: 24, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography variant="overline" sx={{ color: 'rgba(14,16,32,0.45)', fontSize: '0.65rem' }}>
               Case ID
