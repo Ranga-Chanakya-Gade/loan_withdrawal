@@ -34,12 +34,17 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
+  // SN_OAUTH_SCOPE: space-separated scopes required by the target application.
+  // e.g. "useraccount claims.fnol" — set in Vercel env vars.
+  const scope = process.env.SN_OAUTH_SCOPE || process.env.VITE_SN_OAUTH_SCOPE || '';
+
   const body = new URLSearchParams({
     grant_type: 'password',
     username,
     password,
     client_id: clientId,
     client_secret: clientSecret,
+    ...(scope ? { scope } : {}),
   });
 
   try {

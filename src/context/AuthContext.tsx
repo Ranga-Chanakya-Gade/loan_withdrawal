@@ -113,6 +113,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       body.grant_type = 'password';
       body.client_id = DEV_CLIENT_ID;
       body.client_secret = DEV_CLIENT_SECRET;
+      const scope = import.meta.env.VITE_SN_OAUTH_SCOPE as string | undefined;
+      if (scope) body.scope = scope;
     }
 
     const tokenRes = await fetch(OAUTH_URL, {
