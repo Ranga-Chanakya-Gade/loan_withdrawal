@@ -19,6 +19,7 @@ import {
   Tooltip,
   Avatar,
 } from '@mui/material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -35,7 +36,8 @@ import { DXC } from '../../theme/dxcTheme';
 const DRAWER_WIDTH = 252;
 
 const WORKFLOW_STEPS = [
-  { label: 'Case Intake', path: '/', icon: <InboxIcon fontSize="small" /> },
+  { label: 'Dashboard', path: '/', icon: <DashboardIcon fontSize="small" /> },
+  { label: 'Case Intake', path: '/intake', icon: <InboxIcon fontSize="small" /> },
   { label: 'IDP Extraction', path: '/extraction', icon: <DocumentScannerIcon fontSize="small" /> },
   { label: 'Triage Engine', path: '/triage', icon: <AccountTreeIcon fontSize="small" /> },
   { label: 'Processing', path: '/processing', icon: <AssignmentTurnedInIcon fontSize="small" /> },
