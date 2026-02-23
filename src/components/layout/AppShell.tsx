@@ -380,8 +380,8 @@ export function AppShell({ children }: Props) {
         {/* Case header bar — hidden on Dashboard */}
         <Box
           sx={{
-            backgroundColor: DXC.white,
-            borderBottom: '1px solid rgba(14,16,32,0.08)',
+            backgroundColor: DXC.midnightBlue,
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
             px: 3,
             py: 1.25,
             display: currentPath === '/' ? 'none' : 'flex',
@@ -390,85 +390,88 @@ export function AppShell({ children }: Props) {
             flexWrap: 'wrap',
           }}
         >
-          {/* DXC logo — full color on white background */}
+          {/* DXC logo — white on dark background */}
           <Box
             component="img"
             src={dxcLogo}
             alt="DXC Technology"
             sx={{
-              height: 28,
+              height: 26,
               width: 'auto',
               objectFit: 'contain',
               objectPosition: 'left center',
               display: 'block',
               flexShrink: 0,
+              filter: 'brightness(0) invert(1)',
             }}
           />
-          <Box sx={{ width: 1, height: 24, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+          <Box sx={{ width: 1, height: 22, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="overline" sx={{ color: 'rgba(14,16,32,0.45)', fontSize: '0.65rem' }}>
+            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem' }}>
               Case ID
             </Typography>
-            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, fontSize: '0.82rem', color: '#0E1020' }}>
+            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 700, fontSize: '0.82rem', color: DXC.white }}>
               {activeCase.id}
             </Typography>
           </Box>
 
-          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="overline" sx={{ color: 'rgba(14,16,32,0.45)', fontSize: '0.65rem' }}>
+            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem' }}>
               Policy
             </Typography>
-            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.82rem' }}>
+            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.82rem', color: DXC.white }}>
               {activeCase.policyNumber}
             </Typography>
           </Box>
 
-          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="overline" sx={{ color: 'rgba(14,16,32,0.45)', fontSize: '0.65rem' }}>
+            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem' }}>
               Owner
             </Typography>
-            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.82rem' }}>
+            <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.82rem', color: DXC.white }}>
               {activeCase.ownerName}
             </Typography>
           </Box>
 
-          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
 
           <Chip
             label={activeCase.transactionType}
             size="small"
             sx={{
-              backgroundColor: '#dbeafe',
-              color: DXC.trueBlue,
+              backgroundColor: 'rgba(73,149,255,0.2)',
+              color: DXC.sky,
               fontWeight: 700,
               fontSize: '0.68rem',
               height: 22,
+              '& .MuiChip-label': { px: 1 },
             }}
           />
 
-          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+          <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
 
           <Chip
             label={activeCase.channelSource}
             size="small"
             sx={{
-              backgroundColor: '#F6F3F0',
-              color: '#0E1020',
+              backgroundColor: 'rgba(255,255,255,0.08)',
+              color: 'rgba(255,255,255,0.7)',
               fontWeight: 600,
               fontSize: '0.68rem',
               height: 22,
-              border: '1px solid rgba(14,16,32,0.12)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              '& .MuiChip-label': { px: 1 },
             }}
           />
 
           {triageResult && (
             <>
-              <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+              <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.12)' }} />
               <TouchLevelBadge level={triageResult.touchLevel} />
             </>
           )}
@@ -485,8 +488,9 @@ export function AppShell({ children }: Props) {
                 fontSize: '0.68rem',
                 fontWeight: 600,
                 cursor: 'pointer',
-                borderColor: DXC.trueBlue,
-                color: DXC.trueBlue,
+                borderColor: 'rgba(73,149,255,0.5)',
+                color: DXC.sky,
+                '& .MuiChip-icon': { color: DXC.sky },
               }}
             />
           </Tooltip>
