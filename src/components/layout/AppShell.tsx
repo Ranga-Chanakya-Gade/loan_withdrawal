@@ -18,6 +18,7 @@ import {
   ToggleButtonGroup,
   Tooltip,
   Avatar,
+  Button,
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -28,6 +29,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import PolicyIcon from '@mui/icons-material/Policy';
+import LinkIcon from '@mui/icons-material/Link';
 import { useCase } from '../../context/CaseContext';
 import { useAuth } from '../../context/AuthContext';
 import dxcLogo from '../../../DXC-Full-Color.png';
@@ -379,6 +381,144 @@ export function AppShell({ children }: Props) {
           backgroundColor: DXC.canvas,
         }}
       >
+        {/* ── Portal header — always visible ── */}
+        <Box
+          sx={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 10,
+            backgroundColor: DXC.white,
+            borderBottom: '1px solid rgba(14,16,32,0.08)',
+            px: 3,
+            height: 52,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            flexShrink: 0,
+          }}
+        >
+          {/* App name */}
+          <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Box
+              component="img"
+              src={dxcLogo}
+              alt="DXC Technology"
+              sx={{ height: 22, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
+            />
+            <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+            <Typography
+              sx={{
+                fontFamily: '"GT Standard Extended", "Arial Black", sans-serif',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: DXC.midnightBlue,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Loan &amp; Withdrawal Smart App
+            </Typography>
+          </Box>
+
+          {/* User info — authenticated */}
+          {isAuthenticated && user ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              {user.sys_domain?.display_value && (
+                <Chip
+                  label={user.sys_domain.display_value}
+                  size="small"
+                  sx={{
+                    height: 22,
+                    fontSize: '0.65rem',
+                    fontWeight: 600,
+                    backgroundColor: 'rgba(14,16,32,0.05)',
+                    color: 'rgba(14,16,32,0.55)',
+                    border: '1px solid rgba(14,16,32,0.1)',
+                  }}
+                />
+              )}
+              <Box sx={{ textAlign: 'right' }}>
+                <Typography
+                  sx={{
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 600,
+                    fontSize: '0.78rem',
+                    color: DXC.midnightBlue,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {user.name || user.user_name}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '0.65rem',
+                    color: 'rgba(14,16,32,0.4)',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {user.user_name}
+                </Typography>
+              </Box>
+              <Tooltip title="Signed in via ServiceNow OAuth">
+                <Avatar
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    backgroundColor: DXC.trueBlue,
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    fontFamily: '"Inter", sans-serif',
+                    cursor: 'default',
+                  }}
+                >
+                  {(user.name || user.user_name)
+                    .split(' ')
+                    .filter(Boolean)
+                    .map((n: string) => n[0])
+                    .join('')
+                    .slice(0, 2)
+                    .toUpperCase()}
+                </Avatar>
+              </Tooltip>
+            </Box>
+          ) : (
+            /* Not authenticated — demo mode indicator */
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <Chip
+                label="Demo Mode"
+                size="small"
+                sx={{
+                  height: 22,
+                  fontSize: '0.65rem',
+                  fontWeight: 600,
+                  backgroundColor: 'rgba(14,16,32,0.05)',
+                  color: 'rgba(14,16,32,0.45)',
+                  border: '1px solid rgba(14,16,32,0.1)',
+                }}
+              />
+              <Button
+                size="small"
+                startIcon={<LinkIcon sx={{ fontSize: '13px !important' }} />}
+                onClick={() => navigate('/login')}
+                sx={{
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  fontFamily: '"Inter", sans-serif',
+                  color: DXC.trueBlue,
+                  borderRadius: '100px',
+                  textTransform: 'none',
+                  px: 1.5,
+                  '&:hover': { backgroundColor: 'rgba(73,149,255,0.06)' },
+                }}
+              >
+                Connect
+              </Button>
+            </Box>
+          )}
+        </Box>
+
         {/* Case header bar — hidden on Dashboard */}
         <Box
           sx={{
