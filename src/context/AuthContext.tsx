@@ -22,10 +22,11 @@ const API_BASE = isDev ? '/servicenow-api' : '/api/servicenow-api';
 const DEV_CLIENT_ID = isDev ? (import.meta.env.VITE_SN_OAUTH_CLIENT_ID as string) : '';
 const DEV_CLIENT_SECRET = isDev ? (import.meta.env.VITE_SN_OAUTH_CLIENT_SECRET as string) : '';
 
-// User info path — swap for Scripted REST once provisioned in x_dxcis_loans_wi_0
-const USER_INFO_PATH =
+// User info path template — {username} is replaced at login time.
+// Swap for a Scripted REST path via VITE_SN_USER_INFO_PATH once provisioned.
+const USER_INFO_PATH_TEMPLATE =
   (import.meta.env.VITE_SN_USER_INFO_PATH as string | undefined) ??
-  '/api/now/table/sys_user?sysparm_fields=sys_id,name,user_name,email,sys_domain,sys_domain.name&sysparm_limit=1&sysparm_query=active%3Dtrue%5Euser_name%3Djavascript:gs.getUserName()';
+  '/api/now/table/sys_user?sysparm_fields=sys_id,name,user_name,email,sys_domain,sys_domain.name&sysparm_limit=1&sysparm_query=user_name={username}';
 
 const SESSION_KEY = 'sn_auth';
 
@@ -57,9 +58,10 @@ interface AuthContextValue extends AuthState {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-function buildUserInfoURL(): string {
-  if (isDev) return `/servicenow-api${USER_INFO_PATH}`;
-  return `/api/servicenow-api?path=${encodeURIComponent(USER_INFO_PATH)}`;
+function buildUserInfoURL(username: string): string {
+  const path = USER_INFO_PATH_TEMPLATE.replace('{username}', encodeURIComponent(username));
+  if (isDev) return `/servicenow-api${path}`;
+  return `/api/servicenow-api?path=${encodeURIComponent(path)}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -135,10 +137,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     accessTokenRef.current = access_token;
 
-    // Fetch current user + domain via proxy
-    // TODO: Replace USER_INFO_PATH with /api/x_dxcis_loans_wi_0/auth/me
-    // once the Scripted REST endpoint is provisioned in ServiceNow.
-    const userRes = await fetch(buildUserInfoURL(), {
+    // Fetch current user + domain via proxy using the known username
+    const userRes = await fetch(buildUserInfoURL(username), {
       headers: {
         Authorization: `Bearer ${access_token}`,
         Accept: 'application/json',
