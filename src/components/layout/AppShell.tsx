@@ -387,8 +387,8 @@ export function AppShell({ children }: Props) {
             position: 'sticky',
             top: 0,
             zIndex: 10,
-            backgroundColor: DXC.white,
-            borderBottom: '1px solid rgba(14,16,32,0.08)',
+            backgroundColor: DXC.midnightBlue,
+            borderBottom: '1px solid rgba(255,255,255,0.08)',
             px: 3,
             height: 52,
             display: 'flex',
@@ -403,9 +403,9 @@ export function AppShell({ children }: Props) {
               component="img"
               src={dxcLogo}
               alt="DXC Technology"
-              sx={{ height: 22, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
+              sx={{ height: 22, width: 'auto', objectFit: 'contain', flexShrink: 0, filter: 'brightness(0) invert(1)' }}
             />
-            <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(14,16,32,0.12)' }} />
+            <Box sx={{ width: 1, height: 18, borderLeft: '1px solid rgba(255,255,255,0.15)' }} />
             <Typography
               sx={{
                 fontFamily: '"GT Standard Extended", "Arial Black", sans-serif',
@@ -413,7 +413,7 @@ export function AppShell({ children }: Props) {
                 fontSize: '0.75rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                color: DXC.midnightBlue,
+                color: DXC.white,
                 whiteSpace: 'nowrap',
               }}
             >
@@ -432,9 +432,9 @@ export function AppShell({ children }: Props) {
                     height: 22,
                     fontSize: '0.65rem',
                     fontWeight: 600,
-                    backgroundColor: 'rgba(14,16,32,0.05)',
-                    color: 'rgba(14,16,32,0.55)',
-                    border: '1px solid rgba(14,16,32,0.1)',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    color: 'rgba(255,255,255,0.6)',
+                    border: '1px solid rgba(255,255,255,0.15)',
                   }}
                 />
               )}
@@ -444,7 +444,7 @@ export function AppShell({ children }: Props) {
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: 600,
                     fontSize: '0.78rem',
-                    color: DXC.midnightBlue,
+                    color: DXC.white,
                     lineHeight: 1.2,
                   }}
                 >
@@ -454,7 +454,7 @@ export function AppShell({ children }: Props) {
                   sx={{
                     fontFamily: '"Inter", sans-serif',
                     fontSize: '0.65rem',
-                    color: 'rgba(14,16,32,0.4)',
+                    color: 'rgba(255,255,255,0.4)',
                     lineHeight: 1.2,
                   }}
                 >
@@ -493,9 +493,9 @@ export function AppShell({ children }: Props) {
                   height: 22,
                   fontSize: '0.65rem',
                   fontWeight: 600,
-                  backgroundColor: 'rgba(14,16,32,0.05)',
-                  color: 'rgba(14,16,32,0.45)',
-                  border: '1px solid rgba(14,16,32,0.1)',
+                  backgroundColor: 'rgba(255,255,255,0.08)',
+                  color: 'rgba(255,255,255,0.45)',
+                  border: '1px solid rgba(255,255,255,0.12)',
                 }}
               />
               <Button
@@ -506,11 +506,11 @@ export function AppShell({ children }: Props) {
                   fontSize: '0.72rem',
                   fontWeight: 700,
                   fontFamily: '"Inter", sans-serif',
-                  color: DXC.trueBlue,
+                  color: DXC.sky,
                   borderRadius: '100px',
                   textTransform: 'none',
                   px: 1.5,
-                  '&:hover': { backgroundColor: 'rgba(73,149,255,0.06)' },
+                  '&:hover': { backgroundColor: 'rgba(161,230,255,0.08)' },
                 }}
               >
                 Connect

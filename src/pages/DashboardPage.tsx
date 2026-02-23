@@ -165,10 +165,10 @@ function HeroStat({ value, label, loading }: { value: string; label: string; loa
   return (
     <Box>
       {loading
-        ? <CircularProgress size={20} sx={{ color: 'rgba(255,255,255,0.4)', mt: 0.5 }} />
-        : <Typography sx={{ fontFamily: '"GT Standard Extended", "Arial Black", sans-serif', fontWeight: 700, fontSize: '2rem', color: DXC.white, lineHeight: 1 }}>{value}</Typography>
+        ? <CircularProgress size={20} sx={{ color: DXC.trueBlue, mt: 0.5 }} />
+        : <Typography sx={{ fontFamily: '"GT Standard Extended", "Arial Black", sans-serif', fontWeight: 700, fontSize: '2rem', color: DXC.midnightBlue, lineHeight: 1 }}>{value}</Typography>
       }
-      <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', mt: 0.5, fontWeight: 500 }}>{label}</Typography>
+      <Typography sx={{ fontSize: '0.75rem', color: 'rgba(14,16,32,0.45)', mt: 0.5, fontWeight: 500 }}>{label}</Typography>
     </Box>
   );
 }
@@ -249,66 +249,61 @@ export function DashboardPage() {
     <Box>
 
       {/* ── Hero banner ─────────────────────────────────────────────────── */}
-      <Card sx={{ mb: 3, background: `linear-gradient(135deg, ${DXC.midnightBlue} 0%, #0d2040 55%, #1a1438 100%)`, overflow: 'hidden', position: 'relative', border: 'none', boxShadow: '0 4px 32px rgba(14,16,32,0.25)' }}>
-        <Box sx={{ position: 'absolute', top: -60, right: -60, width: 280, height: 280, borderRadius: '50%', background: `radial-gradient(circle, ${DXC.sky}18 0%, transparent 65%)`, pointerEvents: 'none' }} />
-        <Box sx={{ position: 'absolute', bottom: -80, left: 200, width: 320, height: 320, borderRadius: '50%', background: `radial-gradient(circle, ${DXC.trueBlue}14 0%, transparent 65%)`, pointerEvents: 'none' }} />
-        <Box sx={{ position: 'absolute', top: '30%', right: '25%', width: 180, height: 180, borderRadius: '50%', background: `radial-gradient(circle, ${DXC.gold}0e 0%, transparent 65%)`, pointerEvents: 'none' }} />
-
-        <CardContent sx={{ p: { xs: 3, md: 4 }, position: 'relative', zIndex: 1 }}>
+      <Card sx={{ mb: 1.5, backgroundColor: '#fff', overflow: 'hidden', border: '1px solid rgba(14,16,32,0.07)', boxShadow: '0 2px 12px rgba(14,16,32,0.05)', borderRadius: '16px' }}>
+        <CardContent sx={{ p: { xs: 3, md: 4 } }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 3 }}>
             <Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1, flexWrap: 'wrap' }}>
-                <Chip label="ServiceNow FSO" size="small" sx={{ backgroundColor: 'rgba(73,149,255,0.2)', color: DXC.sky, fontWeight: 700, fontSize: '0.65rem', border: '1px solid rgba(161,230,255,0.25)', height: 22 }} />
-                <Chip label="AI-Accelerated" size="small" sx={{ backgroundColor: 'rgba(255,174,65,0.15)', color: DXC.gold, fontWeight: 700, fontSize: '0.65rem', border: '1px solid rgba(255,174,65,0.25)', height: 22 }} />
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5, flexWrap: 'wrap' }}>
+                <Chip label="ServiceNow FSO" size="small" sx={{ backgroundColor: 'rgba(73,149,255,0.1)', color: DXC.trueBlue, fontWeight: 700, fontSize: '0.65rem', border: '1px solid rgba(73,149,255,0.2)', height: 22 }} />
+                <Chip label="AI-Accelerated" size="small" sx={{ backgroundColor: 'rgba(255,174,65,0.1)', color: '#92400e', fontWeight: 700, fontSize: '0.65rem', border: '1px solid rgba(255,174,65,0.3)', height: 22 }} />
                 {/* Auth status badge */}
                 {isAuthenticated
-                  ? <Chip label={`Connected · ${user?.name ?? user?.user_name}`} size="small" icon={<LinkIcon sx={{ fontSize: '12px !important', color: `${DXC.stp} !important` }} />} sx={{ backgroundColor: 'rgba(22,163,74,0.15)', color: DXC.stp, fontWeight: 700, fontSize: '0.65rem', border: `1px solid rgba(22,163,74,0.3)`, height: 22 }} />
-                  : <Chip label="Demo Mode" size="small" sx={{ backgroundColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)', fontWeight: 600, fontSize: '0.65rem', border: '1px solid rgba(255,255,255,0.12)', height: 22 }} />
+                  ? <Chip label={`Connected · ${user?.name ?? user?.user_name}`} size="small" icon={<LinkIcon sx={{ fontSize: '12px !important', color: `${DXC.stp} !important` }} />} sx={{ backgroundColor: 'rgba(22,163,74,0.08)', color: DXC.stp, fontWeight: 700, fontSize: '0.65rem', border: `1px solid rgba(22,163,74,0.25)`, height: 22 }} />
+                  : <Chip label="Demo Mode" size="small" sx={{ backgroundColor: 'rgba(14,16,32,0.06)', color: 'rgba(14,16,32,0.45)', fontWeight: 600, fontSize: '0.65rem', border: '1px solid rgba(14,16,32,0.1)', height: 22 }} />
                 }
               </Box>
-              <Typography variant="h2" sx={{ fontFamily: '"GT Standard Extended", "Arial Black", sans-serif', fontWeight: 700, fontSize: { xs: '1.3rem', md: '1.7rem' }, textTransform: 'uppercase', letterSpacing: '0.04em', color: DXC.white, lineHeight: 1.1, mb: 1 }}>
+              <Typography variant="h2" sx={{ fontFamily: '"GT Standard Extended", "Arial Black", sans-serif', fontWeight: 700, fontSize: { xs: '1.3rem', md: '1.7rem' }, textTransform: 'uppercase', letterSpacing: '0.04em', color: DXC.midnightBlue, lineHeight: 1.1, mb: 1 }}>
                 Loan & Withdrawal<br />Smart App
               </Typography>
-              <Typography sx={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', maxWidth: 440 }}>
+              <Typography sx={{ fontSize: '0.85rem', color: 'rgba(14,16,32,0.55)', maxWidth: 440 }}>
                 Configurable financial transaction processing framework — Policy loans, surrenders, annuity withdrawals, and RMDs.
               </Typography>
             </Box>
 
-            {/* Hero KPIs */}
-            <Box sx={{ display: 'flex', gap: { xs: 3, md: 5 }, flexWrap: 'wrap' }}>
-              <HeroStat value={liveCases ? `${liveCases.length}` : '28'} label="Cases loaded" loading={dataLoading} />
-              <HeroStat value={liveCases ? `${stpRate}%` : '43%'} label="STP rate" loading={dataLoading} />
-              <HeroStat value="91.2%" label="Avg IDP confidence" />
-              <HeroStat value="2.4h" label="Avg processing time" />
+            {/* Hero KPIs + connect button */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: { xs: 3, md: 4 }, flexWrap: 'wrap' }}>
+                <HeroStat value={liveCases ? `${liveCases.length}` : '28'} label="Cases loaded" loading={dataLoading} />
+                <HeroStat value={liveCases ? `${stpRate}%` : '43%'} label="STP rate" loading={dataLoading} />
+                <HeroStat value="91.2%" label="Avg IDP confidence" />
+                <HeroStat value="2.4h" label="Avg processing time" />
+              </Box>
+              {isAuthenticated ? (
+                <Button variant="outlined" size="small" startIcon={<LogoutIcon sx={{ fontSize: 15 }} />} onClick={logout} sx={{ borderColor: 'rgba(14,16,32,0.18)', color: 'rgba(14,16,32,0.5)', fontSize: '0.72rem', '&:hover': { borderColor: 'rgba(14,16,32,0.35)', color: DXC.midnightBlue } }}>
+                  Disconnect
+                </Button>
+              ) : (
+                <Button variant="outlined" size="small" startIcon={<LinkIcon sx={{ fontSize: 15 }} />} onClick={() => setLoginOpen(true)} sx={{ borderColor: 'rgba(73,149,255,0.45)', color: DXC.trueBlue, fontSize: '0.78rem', fontWeight: 700, '&:hover': { borderColor: DXC.trueBlue, backgroundColor: 'rgba(73,149,255,0.06)' } }}>
+                  Connect to ServiceNow
+                </Button>
+              )}
             </Box>
-          </Box>
-
-          {/* Actions */}
-          <Box sx={{ display: 'flex', gap: 1.5, mt: 3, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={() => startCase('loan')} sx={{ backgroundColor: DXC.trueBlue, '&:hover': { backgroundColor: DXC.royalBlue }, fontSize: '0.78rem' }}>
-              New Policy Loan
-            </Button>
-            <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={() => startCase('withdrawal')} sx={{ backgroundColor: DXC.trueBlue, '&:hover': { backgroundColor: DXC.royalBlue }, fontSize: '0.78rem' }}>
-              New Withdrawal
-            </Button>
-            <Button variant="outlined" startIcon={<AccountTreeIcon />} onClick={() => navigate('/triage')} sx={{ borderColor: 'rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.75)', '&:hover': { borderColor: DXC.sky, color: DXC.sky }, fontSize: '0.78rem' }}>
-              Triage Engine
-            </Button>
-
-            <Box sx={{ flex: 1 }} />
-
-            {isAuthenticated ? (
-              <Button variant="outlined" size="small" startIcon={<LogoutIcon sx={{ fontSize: 15 }} />} onClick={logout} sx={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.5)', fontSize: '0.72rem', '&:hover': { borderColor: 'rgba(255,255,255,0.4)', color: 'rgba(255,255,255,0.8)' } }}>
-                Disconnect
-              </Button>
-            ) : (
-              <Button variant="outlined" size="small" startIcon={<LinkIcon sx={{ fontSize: 15 }} />} onClick={() => setLoginOpen(true)} sx={{ borderColor: 'rgba(161,230,255,0.4)', color: DXC.sky, fontSize: '0.78rem', fontWeight: 700, '&:hover': { borderColor: DXC.sky, backgroundColor: 'rgba(161,230,255,0.08)' } }}>
-                Connect to ServiceNow
-              </Button>
-            )}
           </Box>
         </CardContent>
       </Card>
+
+      {/* ── Action strip ────────────────────────────────────────────────── */}
+      <Box sx={{ display: 'flex', gap: 1.5, mb: 3, flexWrap: 'wrap' }}>
+        <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={() => startCase('loan')} sx={{ backgroundColor: DXC.trueBlue, '&:hover': { backgroundColor: DXC.royalBlue }, fontSize: '0.82rem', borderRadius: '10px', px: 2.5 }}>
+          New Policy Loan
+        </Button>
+        <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={() => startCase('withdrawal')} sx={{ backgroundColor: DXC.trueBlue, '&:hover': { backgroundColor: DXC.royalBlue }, fontSize: '0.82rem', borderRadius: '10px', px: 2.5 }}>
+          New Withdrawal
+        </Button>
+        <Button variant="outlined" startIcon={<AccountTreeIcon />} onClick={() => navigate('/triage')} sx={{ borderColor: DXC.trueBlue, color: DXC.trueBlue, '&:hover': { backgroundColor: 'rgba(73,149,255,0.06)', borderColor: DXC.trueBlue }, fontSize: '0.82rem', borderRadius: '10px', px: 2.5 }}>
+          Triage Engine
+        </Button>
+      </Box>
 
       {/* ── KPI cards ───────────────────────────────────────────────────── */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
