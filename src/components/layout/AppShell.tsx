@@ -29,6 +29,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import PolicyIcon from '@mui/icons-material/Policy';
 import { useCase } from '../../context/CaseContext';
+import { useAuth } from '../../context/AuthContext';
 import dxcLogo from '../../../DXC-Full-Color.png';
 import { TouchLevelBadge } from '../shared/TouchLevelBadge';
 import { DXC } from '../../theme/dxcTheme';
@@ -62,6 +63,7 @@ export function AppShell({ children }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const { activeCase, triageResult, scenario, setScenario } = useCase();
+  const { isAuthenticated, user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentPath = location.pathname === '/' ? '/' : `/${location.pathname.split('/')[1]}`;
@@ -292,15 +294,15 @@ export function AppShell({ children }: Props) {
 
       {/* User footer */}
       <Box sx={{ px: 2.5, py: 2, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <Avatar sx={{ width: 28, height: 28, backgroundColor: DXC.trueBlue, fontSize: '0.75rem' }}>
-          SL
+        <Avatar sx={{ width: 28, height: 28, backgroundColor: isAuthenticated ? DXC.stp : 'rgba(255,255,255,0.15)', fontSize: '0.75rem' }}>
+          {isAuthenticated && user ? user.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase() : '?'}
         </Avatar>
-        <Box>
-          <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.78rem', color: DXC.white }}>
-            S. Lyons
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography sx={{ fontFamily: '"Inter", sans-serif', fontWeight: 600, fontSize: '0.78rem', color: DXC.white, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {isAuthenticated && user ? user.name || user.user_name : 'Not connected'}
           </Typography>
-          <Typography sx={{ fontFamily: '"Inter", sans-serif', fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)' }}>
-            Solution Architect
+          <Typography sx={{ fontFamily: '"Inter", sans-serif', fontSize: '0.68rem', color: isAuthenticated ? 'rgba(22,163,74,0.8)' : 'rgba(255,255,255,0.3)' }}>
+            {isAuthenticated ? 'ServiceNow connected' : 'Demo mode'}
           </Typography>
         </Box>
       </Box>
