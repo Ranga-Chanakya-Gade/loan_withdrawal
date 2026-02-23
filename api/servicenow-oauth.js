@@ -25,9 +25,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'username and password are required' });
   }
 
-  const snInstance = process.env.SN_INSTANCE;
-  const clientId = process.env.SN_OAUTH_CLIENT_ID;
-  const clientSecret = process.env.SN_OAUTH_CLIENT_SECRET;
+  const snInstance = process.env.SN_INSTANCE || process.env.VITE_SN_INSTANCE;
+  const clientId = process.env.SN_OAUTH_CLIENT_ID || process.env.VITE_SN_OAUTH_CLIENT_ID;
+  const clientSecret = process.env.SN_OAUTH_CLIENT_SECRET || process.env.VITE_SN_OAUTH_CLIENT_SECRET;
 
   if (!snInstance || !clientId || !clientSecret) {
     console.error('Missing required server environment variables: SN_INSTANCE, SN_OAUTH_CLIENT_ID, SN_OAUTH_CLIENT_SECRET');

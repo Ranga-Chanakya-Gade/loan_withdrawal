@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'path query parameter is required' });
   }
 
-  const snInstance = process.env.SN_INSTANCE;
+  const snInstance = process.env.SN_INSTANCE || process.env.VITE_SN_INSTANCE;
   if (!snInstance) {
     console.error('Missing SN_INSTANCE environment variable');
     return res.status(500).json({ error: 'Server configuration error' });
