@@ -42,11 +42,15 @@ function authHeaders(): HeadersInit {
     try {
       const { accessToken, user } = JSON.parse(stored) as {
         accessToken: string;
-        user: { sys_domain?: { value: string } };
+        user: { sys_domain?: { value: string; display_value?: string } };
       };
       if (accessToken) headers['Authorization'] = `Bearer ${accessToken}`;
+      // Only send X-Domain for non-global domains. Global admins must omit it —
+      // sending a domain header when in global context causes a 403 on some instances.
       const domainId = user?.sys_domain?.value;
-      if (domainId) headers['X-Domain'] = domainId;
+      const domainName = (user?.sys_domain?.display_value ?? '').toLowerCase();
+      const isGlobal = !domainId || domainName === 'global' || domainName === '';
+      if (domainId && !isGlobal) headers['X-Domain'] = domainId;
     } catch { /* ignore */ }
   }
 
@@ -65,9 +69,12 @@ async function handleResponse<T>(res: Response, label: string): Promise<T> {
   }
 
   if (res.status === 403) {
-    throw new Error(
-      'Domain access denied. Your account does not have permission to access this record.',
-    );
+    let detail = '';
+    try {
+      const body = await res.clone().json() as { error?: { message?: string; detail?: string } };
+      detail = body?.error?.detail ?? body?.error?.message ?? '';
+    } catch { /* ignore */ }
+    throw new Error(`Access denied (403)${detail ? `: ${detail}` : ' — check ACLs or role assignments for this table'}`);
   }
 
   if (!res.ok) {
